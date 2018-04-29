@@ -2,11 +2,48 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>#}
+        <title>{% block title %}MJC L'Aigle{% endblock %}</title>
+        {% block stylesheets %}
+            <style>
+                .navbar {
+                    position: relative;
+                    min-height: 50px;
+                    margin-bottom: 20px;
+                    border: 1px solid transparent;
+                }
+                .navbar-default {
+                    background-color: #f8f8f8;
+                    border-color: #e7e7e7;
+                }
+            </style>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid navbar-default">
+                <ul class="nav navbar-nav">
+                    <li > <a href="/web/app_dev.php/">Activités</a> </li>
+                    <li> <a href="#">Mon compte</a> </li>
+                    {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li> <a href="/web/app_dev.php/admin">Administration</a> </li>
+                    {% endif %}
+                        <li> <a href="/web/app_dev.php/logout">Déconnexion</a> </li>
+
+                        {% else %}
+                        <li> <a href="/web/app_dev.php/login">Connexion</a> </li>
+                        <li> <a href="/web/app_dev.php/register">Inscription</a> </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

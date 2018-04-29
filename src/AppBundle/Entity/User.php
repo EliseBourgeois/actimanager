@@ -97,4 +97,28 @@ class User extends BaseUser
     public function getVille(){
         return $this->ville;
     }
+    public function setPrenom($prenom){
+        $this->prenom = $prenom;
+        return $this;
+    }
+    public function setNom($nom){
+        $this->nom = $nom;
+        return $this;
+    }
+    public function setDateNais($dateNais){
+        $this->dateNais = $dateNais;
+        return $this;
+    }
+    public function setAdresse($adresse){
+        $this->adresse = $adresse;
+        return $this;
+    }
+    public function setCodePostal($codePostal){
+        $this->codePostal = $codePostal;
+        return $this;
+    }
+    public function setVille($ville){
+        $this->ville = $ville;
+        return $this;
+    }
 }
