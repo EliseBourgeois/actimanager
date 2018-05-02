@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Inscractivite;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,17 @@ class InscractiviteController extends Controller
      */
     public function indexAction(Request $request, $id )
     {
-        $activite = $this->getDoctrine()
-            -> getRepository('AppBundle:Activite')
-            -> find($id);
+        $entityManager = $this->getDoctrine()->getManager();
 
-        return $this->render('default/inscractivite.html.twig', array('activite' => $activite));
+        $inscription = new Inscractivite();
+        $inscription->setIdUser($this->getUser()->getId());
+        $inscription->setIdactivite($id);
+        $inscription->setValide(false);
+
+        $entityManager->persist($inscription);
+
+
+        $entityManager->flush();
+        return $this->render('default/inscractivite.html.twig');
     }
 }
