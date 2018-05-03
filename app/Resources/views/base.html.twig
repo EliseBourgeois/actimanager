@@ -25,11 +25,11 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid navbar-default">
                 <ul class="nav navbar-nav">
                     <li > <a href="/web/app_dev.php/">Activités</a> </li>
-                    <li> <a href="#">Mon compte</a> </li>
+                    <li> <a href="/web/app_dev.php/mesinscriptions">Mes inscriptions</a> </li>
                     {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <li> <a href="/web/app_dev.php/admin">Administration</a> </li>

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Gestion des inscriptions aux activités</h1>
+    <div id="wrapper">
+        <div id="container">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <th>Identifiant inscription</th>
+                    <th>Nom Activité</th>
+                    <th>Nom de l'adhérent</th>
+                    <th>Inscription Validée</th>
+
+                </tr>
+
+                {% for inscription in liste_inscriptions %}
+                    <tr>
+                        <td>{{ inscription.id }}</td>
+                    {% for activite in liste_activites %}
+                        {% if activite.id == inscription.idactivite %}
+                        <td>{{ activite.nom }}</td>
+                            {% endif %}
+                    {% endfor %}
+                    {% for user in liste_users %}
+                        {% if user.id == inscription.iduser %}
+                        <td>{{ user.username }}</td>
+                            {% endif %}
+                    {% endfor %}
+                        {% if inscription.valide==true %}
+                        <td>Valide</td>
+                        {% else %}
+                        <td>
+                            <button> <a  href="/web/app_dev.php/valide/{{ inscription.id }}"  style="font-size: 12px">
+                                    Valider l'inscription
+                                </a> </button>
+                        </td>
+                            {% endif %}
+                    </tr>
+                {% else %}
+                    <tr><td colspan="8">Aucune inscription</td></tr>
+                {% endfor %}
+
+            </table>
+            <div class="text-center">{{ knp_pagination_render(liste_inscriptions) }}</div>
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}

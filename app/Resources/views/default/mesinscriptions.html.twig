@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Mes inscriptions</h1>
+    <div id="wrapper">
+        <div id="container">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <th>Activité</th>
+                    <th>Jour</th>
+                    <th>Heure</th>
+                    <th>Inscription Validée</th>
+
+                </tr>
+
+                {% for inscription in liste_inscriptions %}
+                    {% if app.user.id == inscription.iduser %}
+                    <tr>
+                    {% for activite in liste_activites %}
+                        {% if activite.id == inscription.idactivite %}
+                        <td>{{ activite.nom }}</td>
+                            <td>{{ activite.jour }}</td>
+                            <td>{{ activite.heure|date('H:i') }}</td>
+                            {% endif %}
+                    {% endfor %}
+
+                        {% if inscription.valide==true %}
+                        <td>Valide</td>
+                        {% else %}
+                        <td>Inscription non validée</td>
+                            {% endif %}
+                    </tr>
+                        {% endif %}
+                {% else %}
+                    <tr><td colspan="8">Aucune inscription</td></tr>
+                {% endfor %}
+
+            </table>
+            <div class="text-center">{{ knp_pagination_render(liste_inscriptions) }}</div>
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}
